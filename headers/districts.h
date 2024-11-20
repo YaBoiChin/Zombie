@@ -4,25 +4,25 @@
 
 #include <string>
 #include <vector>
-using namespace std;        ///// I will change this later
+using namespace std;///// I will change this later
 
-    class District {
+    class District {  ///District Class
         private:
             string name;
-            int zombieCount;
-            int ignorantCount;
-            int alarmedCount;
-
-
+            vector<tuple<string, string>> awareList;
+            vector<tuple<string, string>> zombieList;
+            vector<tuple<string, string>> ingorantList;
 
         public:
-            District(string districtName, int zombies, int ignorant, int alarmed);
+            District(string districtName);
 
         ///// Getter statements
             string getName();
             int getzombieCount();
             int getAlarmedCount();
             int getIgnorantCount();
+
+            void 
 
 
         ///// Setter statements

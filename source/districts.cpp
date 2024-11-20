@@ -1,15 +1,33 @@
-#include "Districts.hh"
+#include "Districts.h"
 #include <iostream>
 
 
-    int main() {
-    
-    District downtown("Downtown", 0);
-    District medicalHill("Medical Hill",  1);
-
-    return 0;
-                
-
-
+    District::District(string districtName, int zombies, int ignorant, int alarmed){
 
     }
+
+        ///// Getter statements
+            string District::getName(){
+
+            }
+            int District::getzombieCount(){
+
+            }
+            int District::getAlarmedCount(){
+
+            }
+            int District::getIgnorantCount(){
+
+            }
+
+
+        ///// Setter statements
+            void District::setIgnorantCount(int count){
+
+            }
+            void District::setAlarmedCount(int count){
+
+            }
+            void District::setZombieCount(int count){
+
+            };
