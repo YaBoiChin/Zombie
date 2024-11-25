@@ -3,7 +3,7 @@
 
 
     District::District(string districtName){
-
+            name = districtName;
     }
 
        void District::set_aware(){
