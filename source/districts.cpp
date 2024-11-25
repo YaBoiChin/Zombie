@@ -1,5 +1,5 @@
 #include "Districts.h"
-#include <iostream>
+
 
 
     District::District(string districtName, int zombies, int ignorant, int alarmed){
