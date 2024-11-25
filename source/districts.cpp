@@ -2,32 +2,16 @@
 
 
 
-    District::District(string districtName, int zombies, int ignorant, int alarmed){
+    District::District(string districtName){
 
     }
 
-        ///// Getter statements
-            string District::getName(){
+       void District::set_aware(){
+
+       }
+        void District::set_ignorant(){
 
             }
-            int District::getzombieCount(){
+            void District::set_zombie(){
 
             }
-            int District::getAlarmedCount(){
-
-            }
-            int District::getIgnorantCount(){
-
-            }
-
-
-        ///// Setter statements
-            void District::setIgnorantCount(int count){
-
-            }
-            void District::setAlarmedCount(int count){
-
-            }
-            void District::setZombieCount(int count){
-
-            };

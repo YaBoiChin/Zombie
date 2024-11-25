@@ -4,6 +4,7 @@
 
 #include <string>
 #include <vector>
+#include "Citizens.h"
 #include "Alarmed.h"
 #include "Ignorant.h"
 #include "Zombie.h"
@@ -25,8 +26,9 @@ using namespace std;///// I will change this later
             void set_aware();
             void set_ignorant();
             void set_zombie();
-        ///// Getter statements
-            int getIgnorantCount();
+            int countainer_count(); //overloaded function
+            float rate_of_growth(); // overloaded function
+
 
             
 

@@ -13,6 +13,9 @@ class Graph{
   public:
   map<int,District> District_map;
   void Populate_districts(ifstream& Citizens);
+  void Migrate();
+  void Quarantine();
+  
 };
 
 #endif
