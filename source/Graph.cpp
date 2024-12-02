@@ -68,7 +68,6 @@ void Graph::Populate_districts(ifstream &Citizens, float pp_one, float pp_two, f
 
 
 void Graph::Migrate(){ // Controls movement between the different districts
-<<<<<<< HEAD
     Scramble(one, 1);
     Scramble(two, 2);
     Scramble(three, 3);
@@ -85,13 +84,6 @@ void Graph::Scramble(District cur, int curInt){
         District target = moveOver(curInt);
         target.alarm.list.push_back(cur.alarm.list[i]);
         cur.alarm.list.erase(cur.alarm.list.begin() + i-1);
-=======
-// District ONE
-  for(int i = 0; i < one.alarm.list.size(); i++){
-    if (isMoved()){
-        District target = moveOver(1);
-        target.alarm.list.push_back(one.alarm.list[i]);
->>>>>>> a9ca0ec0b2d9bb995530079fcb6a5d543bddf3a2
     }
   }
   for(int i = 0; i < cur.ignorant.list.size(); i++){
@@ -110,21 +102,13 @@ void Graph::Scramble(District cur, int curInt){
   }
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> a9ca0ec0b2d9bb995530079fcb6a5d543bddf3a2
 District Graph::moveOver(int currentDistrict){   //untested
   bool found = false;
   while (!found){
     int index  = rand()%5;
     if (District_graph[currentDistrict-1][index]){
       found = true;
-<<<<<<< HEAD
       return District_map[index];
-=======
-      return District_map.at(index);
->>>>>>> a9ca0ec0b2d9bb995530079fcb6a5d543bddf3a2
     };
   };
 }
