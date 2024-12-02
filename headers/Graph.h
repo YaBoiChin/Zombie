@@ -22,9 +22,14 @@ public:
   Graph(District _one, District _two, District _three, District _four, District _five);
   void Populate_districts(ifstream &Citizens, float pp_one, float pp_two, float pp_three, float pp_four, float pp_five);
   void Migrate();
+<<<<<<< HEAD
   void Scramble(District current, int curInt);
   District moveOver(int currentDistrict);
   bool isMoved(string Probability);
+=======
+  District moveOver(int i);
+  bool isMoved();
+>>>>>>> a9ca0ec0b2d9bb995530079fcb6a5d543bddf3a2
   void Quarantine();
   float district_citizens(float &s);
 };
