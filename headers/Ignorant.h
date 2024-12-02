@@ -6,7 +6,7 @@ class Ignorant : public Citizen
 {
 public:
     Ignorant(std::string name) : Citizen(name) {};
-    void virtual Interact(); // It we will decide depending on coolness factor DANCE
+    void virtual Interact(string person); // It we will decide depending on coolness factor DANCE
 };
 
 #endif

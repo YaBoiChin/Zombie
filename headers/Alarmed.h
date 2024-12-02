@@ -7,7 +7,7 @@ class Alarmed : public Citizen
 {
 public:
   Alarmed(std::string name) : Citizen(name) {}
-  virtual void Interact();
+  virtual void Interact(string person);
 };
 
 #endif

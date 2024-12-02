@@ -15,7 +15,7 @@ private:
 public:
     Citizen(string name):name(name){};
     vector<string> list // container of citizens
-    virtual void Interact(typePerson) = 0;
+    virtual void Interact(string person) = 0; // allowing citizens to interact with one another and changing which container they are each stored in
     virtual string report_self() = 0;
 };
 

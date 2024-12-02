@@ -6,12 +6,12 @@
             name = districtName;
     }
 
-       void District::set_aware(){
+       void District::set_aware(string name){
 
        }
-        void District::set_ignorant(){
+        void District::set_ignorant(string name){
 
             }
-            void District::set_zombie(){
+            void District::set_zombie(string name){
 
             }

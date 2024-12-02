@@ -3,6 +3,17 @@
 #include "Citizens.h"
 #include "Districts.h"
 using namespace std;
+
+bool isValidProportion (float X, Y, Z){
+    float total = X + Y + Z;
+    return total ==100; 
+}
+
+bool isValidPercentage ( float first,second,third,fourth,fifth){ //bool function to check validity of percentage (district)
+   float total = first + second + third + fourth + fifth;
+    return total == 100; 
+}
+
 int main() {
     float X, Y, Z;
     int days;
@@ -44,7 +55,23 @@ o	The percentage of people who start out in each district.
     cout<<"Enter percentage of people in whitworth";
     cin>>fifth;
 
-    
+if (isValidProportion(X,Y,Z)){ //if statement to check validity of percentage 
+      cout << "Input Recieved" << endl;
+} else {
+     cout << "INVALID : The total percentage does not equal 100." << endl;
+    }
+
+}
+
+if (isValidPercentage(first,second,third,fourth,fifth)){ //if statement to check validity of percentage 
+      cout << "Input Recieved" << endl;
+} else {
+     cout << "INVALID : The total percentage does not equal 100." << endl;
+    }
+
+}
+
+
     Denizens.open("Denizens.txt");
     if(Denizens.fail()){
         cout<<"Did not open"<<endl;
@@ -55,4 +82,4 @@ o	The percentage of people who start out in each district.
                 
 
 
-    };
+  
