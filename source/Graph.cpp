@@ -1,13 +1,12 @@
 #include "Graph.h"
 Graph::Graph(District _one, District _two, District _three, District _four, District _five){
-one = _one;
-two = _two;
-three = _three;
-four = _four;
-five = _five;
+  one = _one;
+  two = _two;
+  three = _three;
+  four = _four;
+  five = _five;
 }
-void Graph::Populate_districts(ifstream &Citizens, float pp_one, float pp_two, float pp_three, float pp_four, float pp_five)
-{
+void Graph::Populate_districts(ifstream &Citizens, float pp_one, float pp_two, float pp_three, float pp_four, float pp_five){
   //initialize vector and string variables used to take name from txt file
   vector<string> hey;
   string name;
@@ -63,8 +62,8 @@ void Graph::Migrate(){ // Controls movement between the different districts
 // District ONE
   for(int i = 0; i < one.alarm.list.size(); i++){
     if (isMoved()){
-        District target = moveOver();
-        target.alarm.list.push_back(one.alarm.list[i]) 
+        District target = moveOver(1);
+        target.alarm.list.push_back(one.alarm.list[i]);
     }
   }
   for(int i = 0; i < one.ignorant.list.size(); i++){
@@ -134,13 +133,20 @@ void Graph::Migrate(){ // Controls movement between the different districts
 
 }
 
-District Graph::moveOver(District target){
-  
+District Graph::moveOver(int currentDistrict){   //untested
+  bool found = false;
+  while (!found){
+    int index  = rand()%5;
+    if (District_graph[currentDistrict-1][index]){
+      found = true;
+      return District_map.at(index);
+    };
+  };
 }
 void Graph::Quarantine(){
 }
-float Graph::district_citizens(float &s)
-{
+
+float Graph::district_citizens(float &s){
   s = (s / 100) * 2000;
   return s;
 }

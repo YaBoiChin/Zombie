@@ -22,7 +22,7 @@ public:
   Graph(District _one, District _two, District _three, District _four, District _five);
   void Populate_districts(ifstream &Citizens, float pp_one, float pp_two, float pp_three, float pp_four, float pp_five);
   void Migrate();
-  District moveOver(District target, Citizen Citizentype);
+  District moveOver(int i);
   bool isMoved();
   void Quarantine();
   float district_citizens(float &s);
