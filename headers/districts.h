@@ -16,6 +16,7 @@ private:
     string name;
 
 public:
+    District();
     District(string districtName);
     Alarmed alarm;
     Ignorant ignorant;

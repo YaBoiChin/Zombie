@@ -2,12 +2,12 @@
 #define _ALARMED_H_
 #include <string>
 #include "Citizens.h"
-
-class Alarmed : public Citizen
-{
+template <typename T>
+class Alarmed : public Citizen{
 public:
+  Alarmed() : Citizen(){};
   Alarmed(std::string name) : Citizen(name) {}
-  virtual void Interact(string person);
+  virtual void Interact(Citizen<T> person);
 };
 
 #endif
