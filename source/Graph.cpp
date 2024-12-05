@@ -114,8 +114,8 @@ District Graph::moveOver(int currentDistrict){   //untested
 }
 
 
-bool Graph::isMoved(string probability){
-  if (probability == "high"){
+bool Graph::isMoved(string probability){  //determines whether the individual made the decsion to move to a different district
+  if (probability == "High"){
     if (rand() % 100 < 75) return true;
       else return false;
   } else {
@@ -125,7 +125,8 @@ bool Graph::isMoved(string probability){
 }
 
 
-void Graph::Quarantine(){
+void Graph::Quarantine(int district){
+  for (int i = 0; i < 5; i++ ) District_graph[0][i] = false;
 }
 
 float Graph::district_citizens(float &s){

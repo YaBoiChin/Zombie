@@ -20,12 +20,15 @@ public:
     District(string districtName);
     Alarmed alarm;
     Ignorant ignorant;
-    Zombie zombie;
+    Zombie zombie;  
     void set_aware(string name);
     void set_ignorant(string name);
     void set_zombie(string name);
     int countainer_count(); // overloaded function
     float rate_of_growth(); // overloaded function
+
+
+    /*interact method that invokes citizens interact*/
 };
 
 #endif
