@@ -9,7 +9,7 @@ bool isValidProportion (float X, Y, Z){
     return total ==100; 
 }
 
-bool isValidPercentage ( float first,second,third,fourth,fifth){ //bool function to check validity of percentage (district)
+bool isValidPercentage ( float first,float second, float third,float fourth, float fifth){ //bool function to check validity of percentage (district)
    float total = first + second + third + fourth + fifth;
     return total == 100; 
 }
