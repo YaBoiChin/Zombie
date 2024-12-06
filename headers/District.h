@@ -1,5 +1,5 @@
-#ifndef districts_HH
-#define districts_HH
+#ifndef _DISTRICT_H_
+#define _DISTRICT_H_
 
 #include <string>
 #include <vector>
@@ -26,6 +26,7 @@ public:
     void set_zombie(string name);
     int countainer_count(); // overloaded function
     float rate_of_growth(); // overloaded function
+    void Interact(Citizen person1, Citizen person2); // simulate interactions
 
 
     /*interact method that invokes citizens interact*/

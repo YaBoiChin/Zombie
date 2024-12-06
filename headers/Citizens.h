@@ -16,8 +16,7 @@ public:
     Citizen(){name = "N/A";};
     Citizen(string name):name(name){};
     vector<string> list; // container of citizens
-    virtual void Interact(Citizen<T> person) = 0; // allowing citizens to interact with one another and changing which container they are each stored in
-    virtual string report_self() = 0;
+    virtual string report_self(Citizen<T> person) = 0;
 };
 
 #endif

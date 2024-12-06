@@ -7,7 +7,16 @@ class Alarmed : public Citizen{
 public:
   Alarmed() : Citizen(){};
   Alarmed(std::string name) : Citizen(name) {}
-  virtual void Interact(Citizen<T> person);
+  virtual string report_self(Citizen<T> person) {
+
+    string state;
+    
+    if (typeid(person) == typeid(Alarmed)) {
+      state = "Alarmed";
+    } 
+
+    return state;
+  }
 };
 
 #endif

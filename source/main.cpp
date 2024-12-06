@@ -9,11 +9,7 @@ bool isValidProportion (float X, float Y, float Z){
     return total ==100; 
 }
 
-<<<<<<< HEAD
-bool isValidPercentage ( float first,float second, float third,float fourth, float fifth){ //bool function to check validity of percentage (district)
-=======
 bool isValidPercentage ( float first , float second, float third, float fourth, float fifth){ //bool function to check validity of percentage (district)
->>>>>>> 3625016fd3dbce1e7c8b30f563bc118a02ebcf32
    float total = first + second + third + fourth + fifth;
     return total == 100; 
 }
@@ -75,7 +71,6 @@ o	The percentage of people who start out in each district.
         return 1;
     }
 
-
     if (valid){
         Denizens.open("Denizens.txt");
         if(Denizens.fail()){
@@ -87,11 +82,11 @@ o	The percentage of people who start out in each district.
 
         for(int t = 0; t < (24*days); t++){
             town.Migrate();
-            /* downtown.interact();
-            medicalHill.interact();
-            Soho.interact();
-            burbs.interact();
-            whitworth.interact(); */
+            /* downtown.sim();
+            medicalHill.sim();
+            Soho.sim();
+            burbs.sim();
+            whitworth.sim(); */
         }
     }
     

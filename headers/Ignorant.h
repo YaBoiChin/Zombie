@@ -6,9 +6,18 @@ class Ignorant : public Citizen
 {
 public:
     Ignorant() : Citizen(){};
-    Ignorant(std::string name) : Citizen(name) {};
-    virtual void Interact(Citizen<T> person); // It we will decide depending on coolness factor DANCE
-    virtual string 
+    Ignorant(string name) : Citizen(name) {};
+    virtual string report_self(Citizen<T> person) {
+
+    string state;
+    
+   
+   if(typeid(person) == typeid(Ignorant)) {
+      state = "Ignorant";
+    }
+
+    return state;
+  }
 };
 
 #endif
