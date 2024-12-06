@@ -4,12 +4,16 @@
 #include "Districts.h"
 using namespace std;
 
-bool isValidProportion (float X, Y, Z){
+bool isValidProportion (float X, float Y, float Z){
     float total = X + Y + Z;
     return total ==100; 
 }
 
+<<<<<<< HEAD
 bool isValidPercentage ( float first,float second, float third,float fourth, float fifth){ //bool function to check validity of percentage (district)
+=======
+bool isValidPercentage ( float first , float second, float third, float fourth, float fifth){ //bool function to check validity of percentage (district)
+>>>>>>> 3625016fd3dbce1e7c8b30f563bc118a02ebcf32
    float total = first + second + third + fourth + fifth;
     return total == 100; 
 }
@@ -17,6 +21,7 @@ bool isValidPercentage ( float first,float second, float third,float fourth, flo
 int main() {
     float X, Y, Z;
     int days;
+    bool valid = true;
     District downtown("Downtown");
     District medicalHill("Medical Hill");
     District Soho("Soho");
@@ -55,30 +60,47 @@ o	The percentage of people who start out in each district.
     cout<<"Enter percentage of people in whitworth";
     cin>>fifth;
 
-if (isValidProportion(X,Y,Z)){ //if statement to check validity of percentage 
-      cout << "Input Recieved" << endl;
-} else {
-     cout << "INVALID : The total percentage does not equal 100." << endl;
-    }
-
-}
-
-if (isValidPercentage(first,second,third,fourth,fifth)){ //if statement to check validity of percentage 
-      cout << "Input Recieved" << endl;
-} else {
-     cout << "INVALID : The total percentage does not equal 100." << endl;
-    }
-
-}
+    if (isValidProportion(X,Y,Z)){ //if statement to check validity of percentage 
+        cout << "Input recieved" << endl;
+    } else {
+        cout << "INVALID : The total percentage does not equal 100." << endl;
+        valid = false;
+        }
 
 
-    Denizens.open("Denizens.txt");
-    if(Denizens.fail()){
-        cout<<"Did not open"<<endl;
+   if (isValidPercentage(first, second, third, fourth, fifth)) {
+        cout << "Input received" << endl;
+    } else {
+        cout << "INVALID: The total percentage for districts does not equal 100." << endl;
         return 1;
     }
-    town.Populate_districts(Denizens,first,second,third,fourth,fifth);
+
+
+    if (valid){
+        Denizens.open("Denizens.txt");
+        if(Denizens.fail()){
+            cout<<"Did not open"<<endl;
+            return 1;
+        }
+        town.Populate_districts(Denizens,first,second,third,fourth,fifth);
+        
+
+        for(int t = 0; t < (24*days); t++){
+            town.Migrate();
+            /* downtown.interact();
+            medicalHill.interact();
+            Soho.interact();
+            burbs.interact();
+            whitworth.interact(); */
+        }
+    }
+    
     return 0;
+
+
+}
+
+
                 
 
 

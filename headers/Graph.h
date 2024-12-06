@@ -25,7 +25,7 @@ public:
   void Scramble(District current, int curInt);
   District moveOver(int currentDistrict);
   bool isMoved(string Probability);
-  void Quarantine();
+  void Quarantine(int District);
   float district_citizens(float &s);
 };
 
