@@ -1,11 +1,19 @@
 #include "Graph.h"
+
 Graph::Graph(District _one, District _two, District _three, District _four, District _five){
   one = _one;
   two = _two;
   three = _three;
   four = _four;
   five = _five;
+  srand(time(NULL));
 }
+
+float Graph::district_citizens(float &s){
+  s = (s / 100) * 2000;
+  return s;
+}
+
 void Graph::Populate_districts(ifstream &Citizens, float pp_one, float pp_two, float pp_three, float pp_four, float pp_five){
   //initialize vector and string variables used to take name from txt file
   vector<string> hey;
@@ -34,33 +42,31 @@ void Graph::Populate_districts(ifstream &Citizens, float pp_one, float pp_two, f
   //for loop that places each citizen in respective districts
   for(int i =0; i<2000;i++){
     //if statements that determine where to place citizens based on the boundary previously set (the pp's)
-    if(i<=pp_one){
+    if(i < pp_one){
       //if statements that sets citizen zombie and aware using vector elements, else set into first district as ignorant
       if(i == 0){
-      one.set_zombie(hey[i]);
-    }
-    else if(i == 1){
-      two.set_aware(hey[i]);
+      one.alarm.list.push_back(hey[i]);
+    } else if(i == 1){
+      two.zombie.list.push_back(hey[i]);
     }else if (i>1){
-      one.set_ignorant(hey[i]);
+      one.ignorant.list.push_back(hey[i]);
     }
     }
     //within pp_two boundary, set citizen as ignorant
-    else if( i>pp_one&&i<=pp_two){
-     
-      two.set_ignorant(hey[i]);
+    else if( i>pp_one&&i<pp_two){
+      two.ignorant.list.push_back(hey[i]);
     }
     //within pp_three boundary, set citizen as ignorant
-    else if(i>pp_two&&i<=pp_three){
-      three.set_ignorant(hey[i]);
+    else if(i>pp_two&&i<pp_three){
+      three.ignorant.list.push_back(hey[i]);
     }
     //within pp_four boundary, set citizen as ignorant
-    else if(i >pp_three&&i<=pp_four){
-      four.set_ignorant(hey[i]);
+    else if(i >pp_three&&i<pp_four){
+      four.ignorant.list.push_back(hey[i]);
     }
     //within pp_five boundary, set citizen as ignorant
-    else if(i>pp_four&&i<=pp_five){
-      five.set_ignorant(hey[i]);
+    else if(i>pp_four&&i<pp_five){
+      five.ignorant.list.push_back(hey[i]);
     }
   }
     
@@ -74,9 +80,6 @@ void Graph::Migrate(){ // Controls movement between the different districts
     Scramble(four, 4);
     Scramble(five, 5);
 }
-
-
-
 
 void Graph::Scramble(District cur, int curInt){
   for(int i = 0; i < cur.alarm.list.size(); i++){
@@ -109,27 +112,24 @@ District Graph::moveOver(int currentDistrict){   //untested
     if (District_graph[currentDistrict-1][index]){
       found = true;
       return District_map[index];
-    };
-  };
+    }
+  }
+  return District_map[currentDistrict];
 }
 
 
-bool Graph::isMoved(string probability){  //determines whether the individual made the decsion to move to a different district
+bool Graph::isMoved(string probability){  //determines whether the individual made the decision to move to a different district
   if (probability == "High"){
     if (rand() % 100 < 75) return true;
       else return false;
   } else {
-    if (rand() % 100 < 50) return true;
+    if (rand() % 100 < 30) return true;
       else return false;
   }
 }
 
 
 void Graph::Quarantine(int district){
-  for (int i = 0; i < 5; i++ ) District_graph[0][i] = false;
+  for (int i = 0; i < 5; i++ ) District_graph[district][i] = false;
 }
 
-float Graph::district_citizens(float &s){
-  s = (s / 100) * 2000;
-  return s;
-}

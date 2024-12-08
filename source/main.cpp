@@ -1,17 +1,33 @@
 #include <iostream>
 #include "Graph.h"
 #include "Citizens.h"
-#include "Districts.h"
+#include "District.h"
 using namespace std;
 
 bool isValidProportion (float X, float Y, float Z){
     float total = X + Y + Z;
-    return total ==100; 
+    return total == 100; 
 }
 
 bool isValidPercentage ( float first , float second, float third, float fourth, float fifth){ //bool function to check validity of percentage (district)
    float total = first + second + third + fourth + fifth;
     return total == 100; 
+}
+
+void District_interact_AZ(District a,float b){
+    a.interact_A_Z(b);
+}
+void District_interact_AI(District a, float b){
+    a.interact_A_I(b);
+}
+void District_interact_IZ(District a, float b){
+    a.interact_I_Z(b);
+}
+
+void DistrictSim(District a, float az, float ai, float iz){
+    District_interact_AI(a,ai);
+    District_interact_AZ(a,az);
+    District_interact_IZ(a,iz);
 }
 
 int main() {
@@ -24,7 +40,7 @@ int main() {
     District burbs("burbs");
     District whitworth("Whitworth");
 
-    Graph town(downtown,medicalHill,Soho,burbs,whitworth);
+    Graph town(whitworth,medicalHill,Soho,burbs,downtown);
     ifstream Denizens;
 /*
 o	X, the likelihood of an ignorant person becoming a zombie if bitten.
@@ -68,6 +84,7 @@ o	The percentage of people who start out in each district.
         cout << "Input received" << endl;
     } else {
         cout << "INVALID: The total percentage for districts does not equal 100." << endl;
+        valid = false;
         return 1;
     }
 
@@ -82,11 +99,11 @@ o	The percentage of people who start out in each district.
 
         for(int t = 0; t < (24*days); t++){
             town.Migrate();
-            /* downtown.sim();
-            medicalHill.sim();
-            Soho.sim();
-            burbs.sim();
-            whitworth.sim(); */
+            DistrictSim(whitworth, Z, Y, X);
+            DistrictSim(medicalHill, Z, Y, X);
+            DistrictSim(Soho, Z, Y , X );
+            DistrictSim(burbs, Z, Y, X);
+            DistrictSim(downtown, Z, Y, X);
         }
     }
     

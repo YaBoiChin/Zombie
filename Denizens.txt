@@ -1,6 +1,3 @@
-//// what you want me to do 
-//make header files with class, then cpp files that match the headers. 
-//also set up a main.cpp file with int Marina
 Branden Gardner
 Rodrigo Arias
 Carlie Ware
