@@ -4,14 +4,11 @@
 #include "District.h"
 using namespace std;
 
-bool isValidProportion (float X, float Y, float Z){
-    float total = X + Y + Z;
-    return total == 100; 
-}
 
 bool isValidPercentage ( float first , float second, float third, float fourth, float fifth){ //bool function to check validity of percentage (district)
-   float total = first + second + third + fourth + fifth;
-    return total == 100; 
+   float total;
+   total= first + second + third + fourth + fifth;
+    return (total == 100); 
 }
 
 void District_interact_AZ(District a,float b){
@@ -50,35 +47,29 @@ o	D, the number of days you want to the simulation to entail.
 o	The percentage of people who start out in each district.
 
 */
-    cout<<"Enter the likelihood of an ignorant person becoming a zombie if bitten:";
+    cout<<"Enter the likelihood of an ignorant person becoming a zombie if bitten:"<<endl;
     cin>>X;
-    cout<<"Enter the likelihood of an ignorant person becoming alarmed if alerted by an alarmed person:";
+    cout<<"Enter the likelihood of an ignorant person becoming alarmed if alerted by an alarmed person:"<<endl;
     cin>>Y;
-    cout<<"Enter the likelihood of an alarmed person becoming a zombie if bitten:";
+    cout<<"Enter the likelihood of an alarmed person becoming a zombie if bitten:"<<endl;
     cin>>Z;
-    cout<<"Enter the number of days you want to the simulation to entail";
+    cout<<"Enter the number of days you want to the simulation to entail:"<<endl;
     cin>>days;
     
     float first,second,third,fourth,fifth;
 
-    cout<<"Enter percentage of people in Downtown";
+    cout<<"Enter percentage of people in Downtown:"<<endl;
     cin>>first;
-    cout<<"Enter percentage of people in Medical Hill";
+    cout<<"Enter percentage of people in Medical Hill:"<<endl;
     cin>>second;
-    cout<<"Enter percentage of people in Soho";
+    cout<<"Enter percentage of people in Soho:"<<endl;
     cin>>third;
-    cout<<"Enter percentage of people in Burbs";
+    cout<<"Enter percentage of people in Burbs:"<<endl;
     cin>>fourth;
-    cout<<"Enter percentage of people in whitworth";
+    cout<<"Enter percentage of people in whitworth:"<<endl;
     cin>>fifth;
 
-    if (isValidProportion(X,Y,Z)){ //if statement to check validity of percentage 
-        cout << "Input recieved" << endl;
-    } else {
-        cout << "INVALID : The total percentage does not equal 100." << endl;
-        valid = false;
-        }
-
+    
 
    if (isValidPercentage(first, second, third, fourth, fifth)) {
         cout << "Input received" << endl;
