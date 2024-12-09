@@ -77,6 +77,3 @@ void District::interact_A_I(float prob) {
     
     }
 }
-
-
-

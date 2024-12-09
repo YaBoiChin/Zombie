@@ -6,12 +6,12 @@ using namespace std;
 
 bool isValidProportion (float X, float Y, float Z){
     float total = X + Y + Z;
-    return total == 100; 
+    return (total == 100.0); 
 }
 
 bool isValidPercentage ( float first , float second, float third, float fourth, float fifth){ //bool function to check validity of percentage (district)
    float total = first + second + third + fourth + fifth;
-    return total == 100; 
+    return (total == 100); 
 }
 
 void District_interact_AZ(District a,float b){
