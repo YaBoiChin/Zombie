@@ -14,7 +14,7 @@ private:
 public:
     Citizen(){};
       // Static list to hold all citizens' names
-    std::vector<std::string> list;
+     std::vector<std::string> list;
     
 };
 
