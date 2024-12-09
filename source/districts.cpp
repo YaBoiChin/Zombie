@@ -23,38 +23,35 @@ void District::interact_A_Z(float prob) {
 
     likelihood =  rand() % 100;
 
-    if ( likelihood < prob) {
+   
+    if (likelihood < prob && zombie.list.size() > 0) {
         // find a random person inside the alarmed list
         for (int x = 0; x < alarm.list.size(); x++ ) {
             first = rand() % alarm.list.size();
             }
-
-        if (zombie.list.size() > 0) {
             // changing the state of the person
+            if (!alarm.list.empty()) {
             zombie.list.push_back(alarm.list[first]);
-            alarm.list.erase(alarm.list.begin() + first - 1);
+                alarm.list.erase(alarm.list.begin() + first);
+            }
         }
-    
-    }
 }
 
 void District::interact_I_Z(float prob) {
     int first, likelihood;
 
-    likelihood =  rand() % 100;
+    likelihood =  rand()%100;
 
-    if ( likelihood < prob) {
+    if ( likelihood < prob && zombie.list.size() > 0) {
         // find a random person inside the alarmed list
         for (int x = 0; x < ignorant.list.size(); x++ ) {
             first = rand() % ignorant.list.size();
             }
-
-        if (zombie.list.size() > 0) {
             // changing the state of the person
+            if (!ignorant.list.empty()) {
             zombie.list.push_back(ignorant.list[first]);
-            ignorant.list.erase(ignorant.list.begin() + first - 1);
-        }
-    
+                ignorant.list.erase(ignorant.list.begin() + first);
+            }
     }
 }
 
@@ -63,17 +60,17 @@ void District::interact_A_I(float prob) {
 
     likelihood =  rand() % 100;
 
-    if ( likelihood < prob) {
+    if (likelihood < prob && zombie.list.size() > 0) {
         // find a random person inside the alarmed list
         for (int x = 0; x < ignorant.list.size(); x++ ) {
-            first = rand() % ignorant.list.size();
+            first = rand() % ignorant.list.size(); // random index inside ignorant list
             }
 
-        if (alarm.list.size() > 0) {
             // changing the state of the person
-            alarm.list.push_back(ignorant.list[first]);
-            ignorant.list.erase(ignorant.list.begin() + first - 1);
-        }
+            if (ignorant.list.size() > 0) {
+                alarm.list.push_back(ignorant.list[first]);
+                ignorant.list.erase(ignorant.list.begin() + first);
+            } 
     
     }
 }

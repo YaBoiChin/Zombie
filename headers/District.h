@@ -16,9 +16,9 @@ using namespace std;
 class District
 { /// District Class
 private:
-    string name;
 
 public:
+    string name;
     Alarmed alarm;
     Ignorant ignorant;
     Zombie zombie;

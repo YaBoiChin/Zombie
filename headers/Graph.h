@@ -10,7 +10,6 @@ using namespace std;
 class Graph
 {
 private:
-  District  one, two, three, four, five;
   bool District_graph[5][5] = {{false, true, false, false, true}, 
                                {true, false, false, true, true},
                                {false, false, false, true, false},
@@ -18,12 +17,13 @@ private:
                                {true, true, false, false, false}};
 
 public:
-  map<int, District > District_map = {{1, one}, {2, two}, {3, three}, {4, four}, {5, five}};
-  Graph(District _one, District _two, District _three, District _four, District _five);
+  District  one, two, three, four, five;
+  map<int, District*> District_map;
+  Graph(District& _one, District& _two, District& _three, District& _four, District& _five);
   void Populate_districts(ifstream &Citizens, float pp_one, float pp_two, float pp_three, float pp_four, float pp_five);
   void Migrate();
-  void Scramble(District current, int curInt);
-  District moveOver(int currentDistrict);
+  void Scramble(District &current, int curInt);
+  int moveOver(int currentDistrict);
   bool isMoved(string Probability);
   void Quarantine(int District);
   float district_citizens(float &s);

@@ -11,17 +11,17 @@ bool isValidPercentage ( float first , float second, float third, float fourth, 
     return (total == 100); 
 }
 
-void District_interact_AZ(District a,float b){
+void District_interact_AZ(District& a,float b){ // yes
     a.interact_A_Z(b);
 }
-void District_interact_AI(District a, float b){
+void District_interact_AI(District& a, float b){ // yes
     a.interact_A_I(b);
 }
-void District_interact_IZ(District a, float b){
+void District_interact_IZ(District& a, float b){ // yes
     a.interact_I_Z(b);
 }
 
-void DistrictSim(District a, float az, float ai, float iz){
+void DistrictSim(District& a, float az, float ai, float iz){ //no
     District_interact_AI(a,ai);
     District_interact_AZ(a,az);
     District_interact_IZ(a,iz);
@@ -37,7 +37,7 @@ int main() {
     District burbs("burbs");
     District whitworth("Whitworth");
 
-    Graph town(whitworth,medicalHill,Soho,burbs,downtown);
+    Graph town(whitworth, medicalHill, Soho, burbs, downtown);
     ifstream Denizens;
 /*
 o	X, the likelihood of an ignorant person becoming a zombie if bitten.
@@ -85,16 +85,33 @@ o	The percentage of people who start out in each district.
             cout<<"Did not open"<<endl;
             return 1;
         }
-        town.Populate_districts(Denizens,first,second,third,fourth,fifth);
         
+        town.Populate_districts(Denizens,first,second,third,fourth,fifth); // starting here
+        
+        int end = 24 * days;
+        
+        for (int t = 0; t < 672; t++){ 
+            // town.Migrate();
+            // cout << t << ": " << town.one.countainer_count() << endl;
+            // District_interact_AI(town.one, Y);
+            // cout << t << ": alarm " << town.one.alarm.list.size() << endl;
+            // cout << t << ": ignorant " << town.one.ignorant.list.size() << endl;
+            // cout << t << ": zombie " << town.one.zombie.list.size() << endl;
+            DistrictSim(town.one, Z, Y, X);
+            DistrictSim(town.two, Z, Y, X);
+            DistrictSim(town.three, Z, Y , X );
+            DistrictSim(town.four, Z, Y, X);
+            DistrictSim(town.five, Z, Y, X);
+            
 
-        for(int t = 0; t < (24*days); t++){
-            town.Migrate();
-            DistrictSim(whitworth, Z, Y, X);
-            DistrictSim(medicalHill, Z, Y, X);
-            DistrictSim(Soho, Z, Y , X );
-            DistrictSim(burbs, Z, Y, X);
-            DistrictSim(downtown, Z, Y, X);
+            
+            cout << t << ": whitworth " <<  town.one.countainer_count() << endl;
+            cout << "zombies: " << town.one.zombie.list.size() <<endl;
+            cout << t << ": MedicalHill: " << town.two.countainer_count() << endl;
+            cout << "zombies: " << town.two.zombie.list.size() <<endl;
+            cout << t << ": Soho " << town.three.countainer_count() << endl;
+            cout << t << ": Burbs " << town.four.countainer_count() << endl;
+            cout << t << ": downtown " << town.five.countainer_count() << endl;
         }
     }
     

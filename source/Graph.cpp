@@ -1,12 +1,17 @@
 #include "Graph.h"
 
-Graph::Graph(District _one, District _two, District _three, District _four, District _five){
+Graph::Graph(District& _one, District& _two, District& _three, District& _four, District& _five){
   one = _one;
   two = _two;
   three = _three;
   four = _four;
   five = _five;
   srand(time(NULL));
+  District_map[1] = &one;
+  District_map[2] = &two;
+  District_map[3] = &three;
+  District_map[4] = &four;
+  District_map[5] = &five;
 }
 
 float Graph::district_citizens(float &s){
@@ -81,40 +86,42 @@ void Graph::Migrate(){ // Controls movement between the different districts
     Scramble(five, 5);
 }
 
-void Graph::Scramble(District cur, int curInt){
+void Graph::Scramble(District &cur, int curInt){
   for(int i = 0; i < cur.alarm.list.size(); i++){
-    if (isMoved("High")){
-        District target = moveOver(curInt);
-        target.alarm.list.push_back(cur.alarm.list[i]);
-        cur.alarm.list.erase(cur.alarm.list.begin() + i-1);
+    if (isMoved("High") && !cur.alarm.list.empty()){
+        int target = moveOver(curInt);
+          District_map[target]->alarm.list.push_back(cur.alarm.list[i]);
+          cur.alarm.list.erase(cur.alarm.list.begin() + i);
     }
   }
+  
   for(int i = 0; i < cur.ignorant.list.size(); i++){
-    if (isMoved("Low")){
-        District target = moveOver(curInt);
-        target.ignorant.list.push_back(cur.ignorant.list[i]);
-        cur.ignorant.list.erase(cur.ignorant.list.begin() + i-1);
-    }
+    if (isMoved("Low") && !cur.ignorant.list.empty()){
+        int target = moveOver(curInt);
+        District_map[target]->ignorant.list.push_back(cur.ignorant.list[i]);
+          cur.ignorant.list.erase(cur.ignorant.list.begin() + i);
+        }
   }
+
   for(int i = 0; i < cur.zombie.list.size(); i++){
-    if (isMoved("Low")){
-        District target = moveOver(curInt);
-        target.zombie.list.push_back(cur.zombie.list[i]);
-        cur.alarm.list.erase(cur.zombie.list.begin() + i-1);
+    if (isMoved("Low") && !cur.zombie.list.empty()){
+        int target = moveOver(curInt);
+          District_map[target]->zombie.list.push_back(cur.zombie.list[i]);
+          cur.zombie.list.erase(cur.zombie.list.begin() + i);
     }
   }
 }
 
-District Graph::moveOver(int currentDistrict){   //untested
+int Graph::moveOver(int currentDistrict){   //untested
   bool found = false;
   while (!found){
     int index  = rand()%5;
     if (District_graph[currentDistrict-1][index]){
       found = true;
-      return District_map[index];
+      return index;
     }
   }
-  return District_map[currentDistrict];
+  return currentDistrict;
 }
 
 
