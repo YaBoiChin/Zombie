@@ -60,7 +60,7 @@ void District::interact_A_I(float prob) {
 
     likelihood =  rand() % 100;
 
-    if (likelihood < prob && zombie.list.size() > 0) {
+    if (likelihood < prob && alarm.list.size() > 0) {
         // find a random person inside the alarmed list
         for (int x = 0; x < ignorant.list.size(); x++ ) {
             first = rand() % ignorant.list.size(); // random index inside ignorant list
@@ -74,3 +74,4 @@ void District::interact_A_I(float prob) {
     
     }
 }
+

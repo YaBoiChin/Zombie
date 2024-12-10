@@ -2,6 +2,7 @@
 #define _GRAPH_H_
 
 #include <map>
+#include <stack>
 #include <string>
 #include <fstream>
 #include "District.h"
@@ -11,10 +12,10 @@ class Graph
 {
 private:
   bool District_graph[5][5] = {{false, true, false, false, true}, 
-                               {true, false, false, true, true},
+                               {true, false, false, true, true/*yeah boi*/},
                                {false, false, false, true, false},
                                {false, true, true, false, false},
-                               {true, true, false, false, false}};
+                               {true, true /*yeah boi*/, false, false, false}};
 
 public:
   District  one, two, three, four, five;

@@ -80,42 +80,73 @@ void Graph::Populate_districts(ifstream &Citizens, float pp_one, float pp_two, f
 
 void Graph::Migrate(){ // Controls movement between the different districts
     Scramble(one, 1);
-    Scramble(two, 2);
+    // Scramble(two, 2);
     Scramble(three, 3);
     Scramble(four, 4);
-    Scramble(five, 5);
+    // Scramble(five, 5);
 }
 
 void Graph::Scramble(District &cur, int curInt){
-  for(int i = 0; i < cur.alarm.list.size(); i++){
-    if (isMoved("High") && !cur.alarm.list.empty()){
-        int target = moveOver(curInt);
-          District_map[target]->alarm.list.push_back(cur.alarm.list[i]);
-          cur.alarm.list.erase(cur.alarm.list.begin() + i);
-    }
-  }
-  
-  for(int i = 0; i < cur.ignorant.list.size(); i++){
-    if (isMoved("Low") && !cur.ignorant.list.empty()){
-        int target = moveOver(curInt);
-        District_map[target]->ignorant.list.push_back(cur.ignorant.list[i]);
-          cur.ignorant.list.erase(cur.ignorant.list.begin() + i);
+    auto it = cur.alarm.list.begin();
+    
+    vector<string> tempVectA;
+    vector<string> tempVectI;
+    vector<string> tempVectZ;
+    
+    while (it != cur.alarm.list.end()) {
+        if (isMoved("High")) {
+            int target = moveOver(curInt);
+            tempVectA.push_back(*it);
+            District_map[target]->alarm.list.push_back(tempVectA[tempVectA.size() -1]);
+            it = cur.alarm.list.erase(it); 
+        } else{
+            it++;
         }
+    }  
+
+    // for (int x = 0; x < tem)
+
+
+
+     it = cur.ignorant.list.begin();
+    while(it != cur.ignorant.list.end()) {
+      if(isMoved("Low")){
+      int target = moveOver(curInt); // returing the district number that it is
+       tempVectI.push_back(*it);
+       District_map[target]->ignorant.list.push_back(tempVectI[tempVectI.size() -1]);
+      it = cur.ignorant.list.erase(it);
+    } else{
+      it++;
+    }
+    }
+
+    
+  it = cur.zombie.list.begin();
+    while(it != cur.zombie.list.end()) {
+      if(isMoved("Low")){
+      int target = moveOver(curInt); // returning the district number that it is adjacent to
+      tempVectZ.push_back(*it);
+      District_map[target]->zombie.list.push_back(tempVectZ[tempVectZ.size() -1]);
+      it = cur.zombie.list.erase(it);
+    } else{
+      it++;
+    }
   }
 
-  for(int i = 0; i < cur.zombie.list.size(); i++){
-    if (isMoved("Low") && !cur.zombie.list.empty()){
-        int target = moveOver(curInt);
-          District_map[target]->zombie.list.push_back(cur.zombie.list[i]);
-          cur.zombie.list.erase(cur.zombie.list.begin() + i);
-    }
-  }
-}
+
+cout << cur.name << ": " << District_map[curInt]->ignorant.list.size() << endl;
+
+  
+}   
+
+
 
 int Graph::moveOver(int currentDistrict){   //untested
   bool found = false;
-  while (!found){
+  int attempt = 0;
+  while (!found && attempt < 100){
     int index  = rand()%5;
+    attempt++;
     if (District_graph[currentDistrict-1][index]){
       found = true;
       return index;
@@ -140,3 +171,8 @@ void Graph::Quarantine(int district){
   for (int i = 0; i < 5; i++ ) District_graph[district][i] = false;
 }
 
+
+// void MakeMove(int person) {
+//   stack<vector<person*>::iterator> slatedToMove;
+
+// }

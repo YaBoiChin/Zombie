@@ -47,30 +47,38 @@ o	D, the number of days you want to the simulation to entail.
 o	The percentage of people who start out in each district.
 
 */
-    cout<<"Enter the likelihood of an ignorant person becoming a zombie if bitten:"<<endl;
-    cin>>X;
-    cout<<"Enter the likelihood of an ignorant person becoming alarmed if alerted by an alarmed person:"<<endl;
-    cin>>Y;
-    cout<<"Enter the likelihood of an alarmed person becoming a zombie if bitten:"<<endl;
-    cin>>Z;
-    cout<<"Enter the number of days you want to the simulation to entail:"<<endl;
-    cin>>days;
+X = 61;
+Y = 50; 
+Z = 30;
+    // cout<<"Enter the likelihood of an ignorant person becoming a zombie if bitten:"<<endl;
+    // cin>>X;
+    // cout<<"Enter the likelihood of an ignorant person becoming alarmed if alerted by an alarmed person:"<<endl;
+    // cin>>Y;
+    // cout<<"Enter the likelihood of an alarmed person becoming a zombie if bitten:"<<endl;
+    // cin>>Z;
+    // cout<<"Enter the number of days you want to the simulation to entail:"<<endl;
+    // cin>>days;
     
     float first,second,third,fourth,fifth;
 
-    cout<<"Enter percentage of people in Downtown:"<<endl;
-    cin>>first;
-    cout<<"Enter percentage of people in Medical Hill:"<<endl;
-    cin>>second;
-    cout<<"Enter percentage of people in Soho:"<<endl;
-    cin>>third;
-    cout<<"Enter percentage of people in Burbs:"<<endl;
-    cin>>fourth;
-    cout<<"Enter percentage of people in whitworth:"<<endl;
-    cin>>fifth;
+    // cout<<"Enter percentage of people in Downtown:"<<endl;
+    // cin>>first;
+    // cout<<"Enter percentage of people in Medical Hill:"<<endl;
+    // cin>>second;
+    // cout<<"Enter percentage of people in Soho:"<<endl;
+    // cin>>third;
+    // cout<<"Enter percentage of people in Burbs:"<<endl;
+    // cin>>fourth;
+    // cout<<"Enter percentage of people in whitworth:"<<endl;
+    // cin>>fifth;
+
+    first = 20;
+    second = 20;
+    third = 20;
+    fourth = 20;
+    fifth = 20;
 
     
-
    if (isValidPercentage(first, second, third, fourth, fifth)) {
         cout << "Input received" << endl;
     } else {
@@ -91,7 +99,8 @@ o	The percentage of people who start out in each district.
         int end = 24 * days;
         
         for (int t = 0; t < 672; t++){ 
-            // town.Migrate();
+            
+            town.Migrate();
             // cout << t << ": " << town.one.countainer_count() << endl;
             // District_interact_AI(town.one, Y);
             // cout << t << ": alarm " << town.one.alarm.list.size() << endl;
@@ -102,17 +111,30 @@ o	The percentage of people who start out in each district.
             DistrictSim(town.three, Z, Y , X );
             DistrictSim(town.four, Z, Y, X);
             DistrictSim(town.five, Z, Y, X);
-            
 
-            
-            cout << t << ": whitworth " <<  town.one.countainer_count() << endl;
-            cout << "zombies: " << town.one.zombie.list.size() <<endl;
-            cout << t << ": MedicalHill: " << town.two.countainer_count() << endl;
-            cout << "zombies: " << town.two.zombie.list.size() <<endl;
-            cout << t << ": Soho " << town.three.countainer_count() << endl;
-            cout << t << ": Burbs " << town.four.countainer_count() << endl;
-            cout << t << ": downtown " << town.five.countainer_count() << endl;
-        }
+        //     cout << t << ": whitworth " <<  town.one.countainer_count() << endl;
+        //     cout<<"Alarmed: "<<town.one.alarm.list.size()<<endl;
+        //     cout<<"Ignorant:"<<town.one.ignorant.list.size()<<endl;
+        //     cout << "zombies: " << town.one.zombie.list.size() <<endl;
+        //     cout << t << ": MedicalHill: " << town.two.countainer_count() << endl;
+        //     cout<<"Alarmed: "<<town.two.alarm.list.size()<<endl;
+        //     cout<<"Ignorant:"<<town.two.ignorant.list.size()<<endl;
+        //     cout << "zombies: " << town.two.zombie.list.size() <<endl;
+        //     cout << t << ": Soho " <<  town.three.countainer_count() << endl;
+        //     cout<<"Alarmed: "<<town.three.alarm.list.size()<<endl;
+        //     cout<<"Ignorant:"<<town.three.ignorant.list.size()<<endl;
+        //     cout << "zombies: " << town.three.zombie.list.size() <<endl;
+        //     cout << t << ": Burbs: " << town.four.countainer_count() << endl;
+        //     cout<<"Alarmed: "<<town.four.alarm.list.size()<<endl;
+        //     cout<<"Ignorant:"<<town.four.ignorant.list.size()<<endl;
+        //     cout << "zombies: " << town.four.zombie.list.size() <<endl;
+        //     cout << t << ": downtown " <<  town.five.countainer_count() << endl;
+        //     cout<<"Alarmed: "<<town.five.alarm.list.size()<<endl;
+        //     cout<<"Ignorant:"<<town.five.ignorant.list.size()<<endl;
+        //     cout << "zombies: " << town.five.zombie.list.size() <<endl;
+        //     cout<<endl;
+        //     cout<<endl;
+         }
     }
     
     return 0;
