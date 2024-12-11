@@ -1,8 +1,12 @@
 #include "Graph.h"
+#include <cstdlib>
+#include <ctime>
+#include <vector>
+#include <string>
 
 Graph::Graph(District& _one, District& _two, District& _three, District& _four, District& _five)
     : one(_one), two(_two), three(_three), four(_four), five(_five) {
-    srand(static_cast<unsigned>(time(NULL))); // Initialize random seed
+    std::srand(static_cast<unsigned>(std::time(nullptr))); // Initialize random seed
     District_map[1] = &one;
     District_map[2] = &two;
     District_map[3] = &three;
@@ -34,15 +38,34 @@ void Graph::Populate_districts(std::ifstream& Citizens, float pp_one, float pp_t
 
     for (int i = 0; i < 2000; ++i) {
         if (i < pp_one) {
-            (i == 0 ? one.alarm.list : (i == 1 ? one.zombie.list : one.ignorant.list)).push_back(people[i]);
+            if (i == 0) {
+                one.alarm.getList().push_back(people[i]);
+            } else if (i == 1) {
+                one.zombie.getList().push_back(people[i]);
+            } else {
+                one.ignorant.getList().push_back(people[i]);
+            }
         } else if (i < pp_two) {
-            two.ignorant.list.push_back(people[i]);
+            two.ignorant.getList().push_back(people[i]);
         } else if (i < pp_three) {
-            three.ignorant.list.push_back(people[i]);
+            three.ignorant.getList().push_back(people[i]);
         } else if (i < pp_four) {
-            four.ignorant.list.push_back(people[i]);
+            four.ignorant.getList().push_back(people[i]);
         } else if (i < pp_five) {
-            five.ignorant.list.push_back(people[i]);
+            five.ignorant.getList().push_back(people[i]);
+        }
+    }
+}
+
+void Graph::processList(std::vector<std::string>& srcList, const std::string& probability, int curInt, std::vector<int>& targets, std::vector<std::string>& temp) {
+    for (std::vector<std::string>::iterator it = srcList.begin(); it != srcList.end();) {
+        if (isMoved(probability)) {
+            int target = moveOver(curInt);
+            temp.push_back(*it);
+            targets.push_back(target);
+            it = srcList.erase(it);
+        } else {
+            ++it;
         }
     }
 }
@@ -56,35 +79,29 @@ void Graph::Migrate() {
 }
 
 void Graph::Scramble(District& cur, int curInt) {
-    auto processList = [&](std::vector<std::string>& srcList, const std::string& probability, std::vector<int>& targets, std::vector<std::string>& temp) {
-        for (auto it = srcList.begin(); it != srcList.end();) {
-            if (isMoved(probability)) {
-                int target = moveOver(curInt);
-                temp.push_back(*it);
-                targets.push_back(target);
-                it = srcList.erase(it);
-            } else {
-                ++it;
-            }
-        }
-    };
-
     std::vector<std::string> tempA, tempI, tempZ;
     std::vector<int> targetNumsA, targetNumsI, targetNumsZ;
 
-    processList(cur.alarm.list, "High", targetNumsA, tempA);
-    processList(cur.ignorant.list, "Low", targetNumsI, tempI);
-    processList(cur.zombie.list, "Low", targetNumsZ, tempZ);
+    // Process the lists using the general processList function
+    processList(cur.alarm.getList(), "High", curInt, targetNumsA, tempA);
+    processList(cur.ignorant.getList(), "Low", curInt, targetNumsI, tempI);
+    processList(cur.zombie.getList(), "Low", curInt, targetNumsZ, tempZ);
 
-    for (size_t i = 0; i < tempA.size(); ++i) District_map[targetNumsA[i]]->alarm.list.push_back(tempA[i]);
-    for (size_t i = 0; i < tempI.size(); ++i) District_map[targetNumsI[i]]->ignorant.list.push_back(tempI[i]);
-    for (size_t i = 0; i < tempZ.size(); ++i) District_map[targetNumsZ[i]]->zombie.list.push_back(tempZ[i]);
+    for (int i = 0; i < tempA.size(); ++i) {
+        District_map[targetNumsA[i]]->alarm.getList().push_back(tempA[i]);
+    }
+    for (int i = 0; i < tempI.size(); ++i) {
+        District_map[targetNumsI[i]]->ignorant.getList().push_back(tempI[i]);
+    }
+    for (int i = 0; i < tempZ.size(); ++i) {
+        District_map[targetNumsZ[i]]->zombie.getList().push_back(tempZ[i]);
+    }
 }
 
 int Graph::moveOver(int currentDistrict) {
     int attempt = 0;
     while (attempt < 100) {
-        int index = rand() % 5;
+        int index = std::rand() % 5;
         if (District_graph[currentDistrict - 1][index]) {
             return index + 1;
         }
@@ -94,7 +111,10 @@ int Graph::moveOver(int currentDistrict) {
 }
 
 bool Graph::isMoved(std::string probability) {
-    return (probability == "High" ? (rand() % 100 < 75) : (rand() % 100 < 30));
+    if (probability == "High") {
+        return (std::rand() % 100 < 75);
+    }
+    return (std::rand() % 100 < 30);
 }
 
 void Graph::Quarantine(int district) {
