@@ -41,7 +41,7 @@ void Graph::Populate_districts(std::ifstream& Citizens, float pp_one, float pp_t
             if (i == 0) {
                 one.alarm.getList().push_back(people[i]);
             } else if (i == 1) {
-                one.zombie.getList().push_back(people[i]);
+                two.zombie.getList().push_back(people[i]);
             } else {
                 one.ignorant.getList().push_back(people[i]);
             }
@@ -100,7 +100,7 @@ void Graph::Scramble(District& cur, int curInt) {
 
 int Graph::moveOver(int currentDistrict) {
     int attempt = 0;
-    while (attempt < 100) {
+    while (attempt < 1000) {
         int index = std::rand() % 5;
         if (District_graph[currentDistrict - 1][index]) {
             return index + 1;
@@ -119,7 +119,8 @@ bool Graph::isMoved(std::string probability) {
 
 void Graph::Quarantine(int district) {
     for (int i = 0; i < 5; ++i) {
-        District_graph[district - 1][i] = false;
-        District_graph[i][district - 1] = false;
+        District_graph[district - 1][i] = false; // cuts off acces from that district
+        District_graph[i][district - 1] = false; // cuts off access of this district to all others
     }
 }
+

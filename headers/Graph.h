@@ -10,11 +10,11 @@
 class Graph
 {
 private:
-  bool District_graph[5][5] = {{false, true, false, false, true},
-                               {true, false, false, true, true /*yeah boi*/},
-                               {false, false, false, true, false},
-                               {false, true, true, false, false},
-                               {true, true /*yeah boi*/, false, false, false}};
+  bool District_graph[5][5] = {{false, true, false, false, true}, // x = 0
+                               {true, false, false, true, true /*yeah boi*/}, // 1
+                               {false, false, false, true, false}, // 2
+                               {false, true, true, false, false}, // 3
+                               {true, true /*yeah boi*/, false, false, false}}; // 4
 
 public:
   District one, two, three, four, five;
